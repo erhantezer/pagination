@@ -7,9 +7,25 @@ function App() {
   const [page, setPage] = useState(0);
   const [followers, setFollowers] = useState([]);
 
-  const getFetch = () => {
+  const url = 'https://api.github.com/users/john-smilga/followers?per_page=100';
+  const getFetch = async () => {
     setLoading(true)
     try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      const paginate = (follow) => {
+        const itemsPerPage = 10;
+        const numberOfPages = Math.ceil(follow.length / itemsPerPage);
+
+        //! yeni bir dizi oluşturmak 10 arlı 10 adet dizi oluşturma fonksiyonu
+        const newFollowers = Array.from({ length: numberOfPages }, (_, index) => {
+
+          return
+        })
+      }
+
+      setFollowers(data)
       setLoading(false)
     } catch (error) {
       console.log(error)
