@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useState } from "react"
 
 
-
 function App() {
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  const [followers, setFollowers] = useState([]);
 
   const getFetch = () => {
     setLoading(true)
@@ -20,7 +21,7 @@ function App() {
   }, []);
 
 
-  if(loading) {
+  if (loading) {
     console.log("hello")
   }
 
