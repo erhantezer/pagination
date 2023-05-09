@@ -8,6 +8,7 @@ function App() {
   const [followers, setFollowers] = useState([]);
 
   const url = 'https://api.github.com/users/john-smilga/followers?per_page=100';
+
   const getFetch = async () => {
     setLoading(true)
     try {
@@ -18,15 +19,15 @@ function App() {
       const paginate = (follow) => {
         const itemsPerPage = 10;
         const numberOfPages = Math.ceil(follow.length / itemsPerPage);
-
-        
         const newFollowers = Array.from({ length: numberOfPages }, (_, index) => {
           const start = index * itemsPerPage
-          return
+          return follow.slice(start, start + itemsPerPage)
         })
+
+        return newFollowers
       }
 
-      setFollowers(data)
+      setFollowers(paginate(data))
       setLoading(false)
     } catch (error) {
       console.log(error)
