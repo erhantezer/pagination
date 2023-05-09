@@ -20,7 +20,7 @@ function App() {
 
         //! yeni bir dizi oluşturmak 10 arlı 10 adet dizi oluşturma fonksiyonu
         const newFollowers = Array.from({ length: numberOfPages }, (_, index) => {
-
+          const start = index * itemsPerPage
           return
         })
       }
