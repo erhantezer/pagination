@@ -14,11 +14,12 @@ function App() {
       const res = await fetch(url);
       const data = await res.json();
 
+      //! yeni bir dizi oluşturmak 10 arlı 10 adet dizi oluşturma fonksiyonu
       const paginate = (follow) => {
         const itemsPerPage = 10;
         const numberOfPages = Math.ceil(follow.length / itemsPerPage);
 
-        //! yeni bir dizi oluşturmak 10 arlı 10 adet dizi oluşturma fonksiyonu
+        
         const newFollowers = Array.from({ length: numberOfPages }, (_, index) => {
           const start = index * itemsPerPage
           return
