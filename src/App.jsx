@@ -83,8 +83,13 @@ function App() {
                     </a>
                   </article>
                   )
-              })}
+              })};
             </div>
+            {!loading && (
+                <div className="btn-container">
+                    
+                </div>
+              )}
           </section>
       </main>
     </>
