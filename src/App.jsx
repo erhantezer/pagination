@@ -87,7 +87,9 @@ function App() {
             </div>
             {!loading && (
                 <div className="btn-container">
-                    
+                    <button className="prev-btn" onClick={prevPage}>
+                      prev
+                    </button>
                 </div>
               )}
           </section>
