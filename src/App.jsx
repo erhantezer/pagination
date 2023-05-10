@@ -39,6 +39,15 @@ function App() {
   }, []);
 
 
+
+  const prevPage = () => {
+    setPage()
+  };
+
+  const nextPage = () => {
+    setPage()
+  }
+
   if (loading) {
     console.log("hello")
   }
