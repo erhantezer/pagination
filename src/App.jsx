@@ -41,11 +41,22 @@ function App() {
 
 
   const prevPage = () => {
-    setPage()
+    setPage((oldPage) => {
+      let newPage = oldPage - 1
+      if (newPage < 0){
+        return followers.length - 1
+      }
+      return newPage;
+    })
   };
 
   const nextPage = () => {
-    setPage()
+    setPage((oldPage) => {
+      let newPage = oldPage + 1;
+      if(newPage > followers.length -1){
+        nextPage = 0;
+      }
+    })
   }
 
   if (loading) {
@@ -54,9 +65,15 @@ function App() {
 
   return (
     <>
-      <section>
-
-      </section>
+      <main>
+          <div className="section-title">
+          <h1 className={`${loading ? 'loading...' : 'pagination'}`}></h1>
+            <div className="underline"></div>
+          </div>
+          <section>
+            
+          </section>
+      </main>
     </>
   )
 }
