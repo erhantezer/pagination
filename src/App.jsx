@@ -71,7 +71,20 @@ function App() {
             <div className="underline"></div>
           </div>
           <section>
-            
+            <div className="container">
+              {followers?.map((follower) => {
+                const {avatar_url, html_url, login} = follower;
+                return (
+                  <article className='card'>
+                    <img src={avatar_url} alt={login} />
+                    <h4>${login}</h4>
+                    <a href={html_url} className='btn'>
+                      view profile
+                    </a>
+                  </article>
+                  )
+              })}
+            </div>
           </section>
       </main>
     </>
