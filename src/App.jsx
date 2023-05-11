@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     if (loading) return
     setFollowers(veri[page])
-  }, [loading, page])
+  }, [loading, page]);
 
 
   const getFetch = async () => {
@@ -31,7 +31,6 @@ function App() {
           const start = index * itemsPerPage
           return follow.slice(start, start + itemsPerPage)
         })
-
         return newFollowers
       }
 
@@ -123,7 +122,6 @@ function App() {
               
             </>
           )}
-
         </section>
       </main>
     </>
