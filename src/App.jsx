@@ -10,12 +10,10 @@ function App() {
 
   const url = 'https://api.github.com/users/erhantezer/followers?per_page=100';
 
-
   useEffect(() => {
     if (loading) return
     setFollowers(veri[page])
   }, [loading, page]);
-
 
   const getFetch = async () => {
     setLoading(true)
@@ -45,8 +43,6 @@ function App() {
     getFetch()
   }, []);
 
-
-
   const prevPage = () => {
     setPage((oldPage) => {
       let newPage = oldPage - 1
@@ -67,12 +63,9 @@ function App() {
     })
   }
 
-
   const handlePage = (index) => {
     setPage(index)
   }
-
-
 
   return (
     <>
