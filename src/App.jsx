@@ -9,6 +9,13 @@ function App() {
 
   const url = 'https://api.github.com/users/john-smilga/followers?per_page=100';
 
+
+  useEffect(() => {
+    if (loading) return
+    setFollowers(followers[page])
+  }, [loading, page])
+
+
   const getFetch = async () => {
     setLoading(true)
     try {
@@ -43,7 +50,7 @@ function App() {
   const prevPage = () => {
     setPage((oldPage) => {
       let newPage = oldPage - 1
-      if (newPage < 0){
+      if (newPage < 0) {
         return followers.length - 1
       }
       return newPage;
@@ -53,7 +60,7 @@ function App() {
   const nextPage = () => {
     setPage((oldPage) => {
       let newPage = oldPage + 1;
-      if(newPage > followers.length -1){
+      if (newPage > followers.length - 1) {
         nextPage = 0;
       }
     })
@@ -71,44 +78,51 @@ function App() {
   return (
     <>
       <main>
-          <div className="section-title">
+        <div className="section-title">
           <h1 className={`${loading ? 'loading...' : 'pagination'}`}></h1>
-            <div className="underline"></div>
+          <div className="underline"></div>
+        </div>
+        <section>
+          <div className="container">
+            {followers?.map((follower, i) => {
+              const { avatar_url, html_url, login } = follower;
+              return (
+                <article key={i} className='card'>
+                  <img src={avatar_url} alt={login} />
+                  <h4>${login}</h4>
+                  <a href={html_url} className='btn'>
+                    view profile
+                  </a>
+                </article>
+              )
+            })};
           </div>
-          <section>
-            <div className="container">
-              {followers?.map((follower) => {
-                const {avatar_url, html_url, login} = follower;
-                return (
-                  <article className='card'>
-                    <img src={avatar_url} alt={login} />
-                    <h4>${login}</h4>
-                    <a href={html_url} className='btn'>
-                      view profile
-                    </a>
-                  </article>
-                  )
-              })};
-            </div>
-            {!loading && (
-                <div className="btn-container">
-                    <button className="prev-btn" onClick={prevPage}>
-                      prev
+          {!loading && (
+            <>
+              <div className="btn-container">
+                <button className="prev-btn" onClick={prevPage}>
+                  prev
+                </button>
+                {followers?.map((item, index) => {
+                  return (
+                    <button
+                      key={index}
+                      className={`page-btn ${index === page ? 'active-btn' : null}`}
+                      onClick={() => handlePage(index)}
+                    >
+                      {index + 1}
                     </button>
-                    {followers?.map((item,index) => {
-                      return(
-                        <button
-                        key={index}
-                        className={`page-btn ${index === page ? 'active-btn' : null}`}
-                        onClick={() =>handlePage(index)}
-                        >
-                          {index + 1}
-                        </button>
-                        )
-                    })}
-                </div>
-              )}
-          </section>
+                  )
+                })}
+                <button className="next-btn" onClick={nextPage}>
+                  next
+                </button>
+              </div>
+              
+            </>
+          )}
+
+        </section>
       </main>
     </>
   )
