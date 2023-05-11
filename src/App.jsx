@@ -5,12 +5,16 @@ import { useState } from "react"
 function App() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
+  const [veri, setVeri] = useState([]);
   const [followers, setFollowers] = useState([]);
 
-  const url = 'https://api.github.com/users/john-smilga/followers?per_page=100';
+  const url = 'https://api.github.com/users/erhantezer/followers?per_page=100';
 
 
-  
+  useEffect(() => {
+    if (loading) return
+    setFollowers(veri[page])
+  }, [loading, page])
 
 
   const getFetch = async () => {
@@ -31,7 +35,7 @@ function App() {
         return newFollowers
       }
 
-      setFollowers(paginate(data))
+      setVeri(paginate(data))
       setLoading(false)
     } catch (error) {
       console.log(error)
@@ -42,10 +46,7 @@ function App() {
     getFetch()
   }, []);
 
-  useEffect(() => {
-    if (loading) return
-    setFollowers(followers[page])
-  }, [loading, page])
+
 
   const prevPage = () => {
     setPage((oldPage) => {
@@ -80,14 +81,13 @@ function App() {
     <>
       <main>
         <div className="section-title">
-          <h1 className={`${loading ? 'loading...' : 'pagination'}`}></h1>
+          <h1>{loading ? 'loading...' : 'pagination'}</h1>
           <div className="underline"></div>
         </div>
-        <section>
+        <section className="followers">
           <div className="container">
             {followers?.map((follower, i) => {
               const { avatar_url, html_url, login } = follower;
-              console.log(login)
               return (
                 <article key={i} className='card'>
                   <img src={avatar_url} alt={login} />
@@ -97,7 +97,7 @@ function App() {
                   </a>
                 </article>
               )
-            })};
+            })}
           </div>
           {!loading && (
             <>
@@ -105,7 +105,7 @@ function App() {
                 <button className="prev-btn" onClick={prevPage}>
                   prev
                 </button>
-                {followers?.map((item, index) => {
+                {veri?.map((item, index) => {
                   return (
                     <button
                       key={index}
