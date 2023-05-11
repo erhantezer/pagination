@@ -72,9 +72,7 @@ function App() {
     setPage(index)
   }
 
-  if (loading) {
-    console.log("hello")
-  }
+
 
   return (
     <>
@@ -98,6 +96,7 @@ function App() {
               )
             })}
           </div>
+
           {!loading && (
             <>
               <div className="btn-container">
@@ -119,7 +118,6 @@ function App() {
                   next
                 </button>
               </div>
-              
             </>
           )}
         </section>
