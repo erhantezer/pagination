@@ -10,10 +10,7 @@ function App() {
   const url = 'https://api.github.com/users/john-smilga/followers?per_page=100';
 
 
-  useEffect(() => {
-    if (loading) return
-    setFollowers(followers[page])
-  }, [loading, page])
+  
 
 
   const getFetch = async () => {
@@ -45,7 +42,10 @@ function App() {
     getFetch()
   }, []);
 
-
+  useEffect(() => {
+    if (loading) return
+    setFollowers(followers[page])
+  }, [loading, page])
 
   const prevPage = () => {
     setPage((oldPage) => {
@@ -61,8 +61,9 @@ function App() {
     setPage((oldPage) => {
       let newPage = oldPage + 1;
       if (newPage > followers.length - 1) {
-        nextPage = 0;
+        newPage = 0;
       }
+      return newPage
     })
   }
 
@@ -86,6 +87,7 @@ function App() {
           <div className="container">
             {followers?.map((follower, i) => {
               const { avatar_url, html_url, login } = follower;
+              console.log(login)
               return (
                 <article key={i} className='card'>
                   <img src={avatar_url} alt={login} />
