@@ -59,6 +59,11 @@ function App() {
     })
   }
 
+
+  const handlePage = (index) => {
+    setPage(index)
+  }
+
   if (loading) {
     console.log("hello")
   }
@@ -90,6 +95,17 @@ function App() {
                     <button className="prev-btn" onClick={prevPage}>
                       prev
                     </button>
+                    {followers?.map((item,index) => {
+                      return(
+                        <button
+                        key={index}
+                        className={`page-btn ${index === page ? 'active-btn' : null}`}
+                        onClick={() =>handlePage(index)}
+                        >
+                          {index + 1}
+                        </button>
+                        )
+                    })}
                 </div>
               )}
           </section>
